@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ivy-module version="2.0">
+  <info organisation="org.nodejs" module="node" revision="6.7.0" />
+  <configurations>
+    <conf name="default" visibility="public" />
+  </configurations>
+  <publications>
+    <artifact name="node" type="tar.gz" ext="tar.gz" conf="default" />
+  </publications>
+</ivy-module>

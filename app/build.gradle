@@ -89,6 +89,12 @@ repositories {
     maven { url "https://jitpack.io" }
 }
 
+node {
+    version = '6.7.0'
+    download = true
+    distBaseUrl = "file://${project.projectDir}/local-ivy"
+}
+
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "com.android.support:appcompat-v7:${supportVersion}"
