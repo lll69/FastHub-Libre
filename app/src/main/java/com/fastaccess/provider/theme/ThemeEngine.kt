@@ -19,25 +19,25 @@ import com.fastaccess.ui.modules.login.chooser.LoginChooserActivity
 
 object ThemeEngine {
 
-    fun apply(activity: BaseActivity<*, *>) {
+    fun apply(activity: BaseActivity<*, *>, dark: Boolean) {
         if (hasTheme(activity)) {
             return
         }
-        val themeMode = PrefGetter.getThemeType(activity)
+        val themeMode = PrefGetter.getThemeType(activity, dark)
         val themeColor = PrefGetter.getThemeColor(activity)
         activity.setTheme(getTheme(themeMode, themeColor))
         setTaskDescription(activity)
-        applyNavBarColor(activity)
+        applyNavBarColor(activity, dark)
     }
 
-    private fun applyNavBarColor(activity: Activity) {
-        if (!PrefGetter.isNavBarTintingDisabled() && PrefGetter.getThemeType() != PrefGetter.LIGHT) {
+    private fun applyNavBarColor(activity: Activity, dark: Boolean) {
+        if (!PrefGetter.isNavBarTintingDisabled() && PrefGetter.getThemeType(dark) != PrefGetter.LIGHT) {
             activity.window.navigationBarColor = ViewHelper.getPrimaryColor(activity)
         }
     }
 
-    fun applyForAbout(activity: MaterialAboutActivity) {
-        val themeMode = PrefGetter.getThemeType(activity)
+    fun applyForAbout(activity: MaterialAboutActivity, dark: Boolean) {
+        val themeMode = PrefGetter.getThemeType(activity, dark)
         when (themeMode) {
             PrefGetter.LIGHT -> activity.setTheme(R.style.AppTheme_AboutActivity_Light)
             PrefGetter.DARK -> activity.setTheme(R.style.AppTheme_AboutActivity_Dark)
@@ -48,8 +48,8 @@ object ThemeEngine {
         setTaskDescription(activity)
     }
 
-    fun applyDialogTheme(activity: BaseActivity<*, *>) {
-        val themeMode = PrefGetter.getThemeType(activity)
+    fun applyDialogTheme(activity: BaseActivity<*, *>, dark: Boolean) {
+        val themeMode = PrefGetter.getThemeType(activity, dark)
         val themeColor = PrefGetter.getThemeColor(activity)
         activity.setTheme(getDialogTheme(themeMode, themeColor))
         setTaskDescription(activity)

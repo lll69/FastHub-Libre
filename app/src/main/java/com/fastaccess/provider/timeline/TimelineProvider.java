@@ -18,6 +18,7 @@ import com.fastaccess.helper.PrefGetter;
 import com.fastaccess.helper.ViewHelper;
 import com.fastaccess.ui.widgets.SpannableBuilder;
 import com.zzhoujay.markdown.style.CodeSpan;
+import lll69.fasthub.DarkModeUtil;
 
 import java.util.Date;
 
@@ -104,7 +105,7 @@ public class TimelineProvider {
                                     "conversation");
                 } else if (event == IssueEventType.head_ref_deleted || event == IssueEventType.head_ref_restored) {
                     spannableBuilder.append(" ").append(event.name().replaceAll("_", " "),
-                            new BackgroundColorSpan(HtmlHelper.getWindowBackground(PrefGetter.getThemeType())));
+                            new BackgroundColorSpan(HtmlHelper.getWindowBackground(PrefGetter.getThemeType(DarkModeUtil.isDarkMode(context.getResources())))));
                 } else if (event == IssueEventType.milestoned || event == IssueEventType.demilestoned) {
                     spannableBuilder.append(" ")
                             .append(event == IssueEventType.milestoned ? "added this to the" : "removed this from the")

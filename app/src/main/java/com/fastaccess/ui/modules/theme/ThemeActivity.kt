@@ -6,6 +6,8 @@ import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.ViewAnimationUtils
+import android.widget.AdapterView
+import android.widget.Spinner
 import butterknife.BindView
 import butterknife.OnClick
 import com.fastaccess.R
@@ -25,10 +27,11 @@ import com.fastaccess.ui.widgets.ViewPagerView
  * Created by Kosh on 08 Jun 2017, 10:34 PM
  */
 
-class ThemeActivity : BaseActivity<BaseMvp.FAView, BasePresenter<BaseMvp.FAView>>(), ThemeFragmentMvp.ThemeListener {
+class ThemeActivity : BaseActivity<BaseMvp.FAView, BasePresenter<BaseMvp.FAView>>(), ThemeFragmentMvp.ThemeListener, AdapterView.OnItemSelectedListener {
 
     @BindView(R.id.pager) lateinit var pager: ViewPagerView
     @BindView(R.id.parentLayout) lateinit var parentLayout: View
+    @BindView(R.id.systemModeSpinner) lateinit var systemModeSpinner: Spinner
 
     @OnClick(R.id.premium) fun onOpenPremium() {
         PremiumActivity.startActivity(this)
@@ -46,6 +49,10 @@ class ThemeActivity : BaseActivity<BaseMvp.FAView, BasePresenter<BaseMvp.FAView>
         return BasePresenter()
     }
 
+    override fun isDarkMode(): Boolean {
+        return if(!::systemModeSpinner.isInitialized) super.isDarkMode() else getSelectedSystemMode() == 1
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         pager.adapter = FragmentsPagerAdapter(supportFragmentManager, FragmentPagerAdapterModel.buildForTheme())
@@ -57,9 +64,11 @@ class ThemeActivity : BaseActivity<BaseMvp.FAView, BasePresenter<BaseMvp.FAView>
         pager.setPageTransformer(true, CardsPagerTransformerBasic(4, 10))
         pager.setPadding(pagerPadding, pagerPadding, pagerPadding, pagerPadding)
         if (savedInstanceState == null) {
-            val theme = PrefGetter.getThemeType(this)
+            val theme = PrefGetter.getThemeType(this, getSelectedSystemMode() == 1)
             pager.setCurrentItem(theme - 1, true)
         }
+        systemModeSpinner.setSelection(if(super.isDarkMode()) 1 else 0)
+        systemModeSpinner.setOnItemSelectedListener(this)
     }
 
     override fun onChangePrimaryDarkColor(color: Int, darkIcons: Boolean) {
@@ -98,4 +107,17 @@ class ThemeActivity : BaseActivity<BaseMvp.FAView, BasePresenter<BaseMvp.FAView>
         onThemeChanged()
     }
 
+    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        if (parent == systemModeSpinner) {
+            val theme = PrefGetter.getThemeType(this, position == 1)
+            pager.setCurrentItem(theme - 1, true)
+        }
+    }
+
+    override fun onNothingSelected(parent: AdapterView<*>?) {
+    }
+
+    public fun getSelectedSystemMode(): Int {
+        return systemModeSpinner.getSelectedItemPosition()
+    }
 }

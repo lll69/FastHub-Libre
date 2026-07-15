@@ -272,20 +272,20 @@ public class PrefGetter {
         return PrefHelper.getBoolean(SENT_VIA_BOX);
     }
 
-    @ThemeType public static int getThemeType(@NonNull Context context) {
-        return getThemeType(context.getResources());
+    @ThemeType public static int getThemeType(@NonNull Context context, boolean dark) {
+        return getThemeType(context.getResources(), dark);
     }
 
-    @ThemeType public static int getThemeType() {
-        return getThemeType(App.getInstance().getResources());
+    @ThemeType public static int getThemeType(boolean dark) {
+        return getThemeType(App.getInstance().getResources(), dark);
     }
 
     @ThemeColor public static int getThemeColor(@NonNull Context context) {
         return getThemeColor(context.getResources());
     }
 
-    @ThemeType static int getThemeType(@NonNull Resources resources) {
-        String appTheme = PrefHelper.getString("appTheme");
+    @ThemeType static int getThemeType(@NonNull Resources resources, boolean dark) {
+        String appTheme = PrefHelper.getString(dark ? "appThemeDark" : "appTheme");
         if (!InputHelper.isEmpty(appTheme)) {
             if (appTheme.equalsIgnoreCase(resources.getString(R.string.dark_theme_mode))) {
                 return DARK;

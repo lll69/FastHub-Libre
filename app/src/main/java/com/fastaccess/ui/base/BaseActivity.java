@@ -58,6 +58,7 @@ import com.fastaccess.ui.modules.settings.SettingsActivity;
 import com.fastaccess.ui.widgets.dialog.MessageDialogView;
 import com.fastaccess.ui.widgets.dialog.ProgressDialogFragment;
 
+import lll69.fasthub.DarkModeUtil;
 import net.grandcentrix.thirtyinch.TiActivity;
 
 import java.util.ArrayList;
@@ -103,6 +104,10 @@ public abstract class BaseActivity<V extends BaseMvp.FAView, P extends BasePrese
         super.onSaveInstanceState(outState);
         StateSaver.saveInstanceState(this, outState);
         getPresenter().onSaveInstanceState(presenterStateBundle);
+    }
+
+    protected boolean isDarkMode() {
+        return DarkModeUtil.isDarkMode(getResources());
     }
 
     @Override protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -387,7 +392,7 @@ public abstract class BaseActivity<V extends BaseMvp.FAView, P extends BasePrese
     }
 
     private void setupTheme() {
-        ThemeEngine.INSTANCE.apply(this);
+        ThemeEngine.INSTANCE.apply(this, isDarkMode());
     }
 
     protected void setupNavigationView() {

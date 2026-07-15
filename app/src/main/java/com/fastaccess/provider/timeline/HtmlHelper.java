@@ -33,6 +33,7 @@ import com.fastaccess.provider.timeline.handler.SuperScriptHandler;
 import com.fastaccess.provider.timeline.handler.TableHandler;
 import com.fastaccess.provider.timeline.handler.UnderlineHandler;
 
+import lll69.fasthub.DarkModeUtil;
 import net.nightwhistler.htmlspanner.HtmlSpanner;
 import net.nightwhistler.htmlspanner.handlers.BoldHandler;
 
@@ -79,7 +80,7 @@ public class HtmlHelper {
     }
 
     private static HtmlSpanner initHtml(@NonNull TextView textView, int width) {
-        @PrefGetter.ThemeType int theme = PrefGetter.getThemeType();
+        @PrefGetter.ThemeType int theme = PrefGetter.getThemeType(DarkModeUtil.isDarkMode(textView.getResources()));
         @ColorInt int windowBackground = getWindowBackground(theme);
         Drawable checked = ContextCompat.getDrawable(textView.getContext(), R.drawable.ic_checkbox_small);
         Drawable unchecked = ContextCompat.getDrawable(textView.getContext(), R.drawable.ic_checkbox_empty_small);

@@ -25,6 +25,7 @@ import com.fastaccess.R;
 import java.util.Locale;
 
 import es.dmoral.toasty.Toasty;
+import lll69.fasthub.DarkModeUtil;
 
 /**
  * Created by kosh20111 on 18 Oct 2016, 9:29 PM
@@ -71,7 +72,7 @@ public class AppHelper {
     }
 
     public static boolean isNightMode(@NonNull Resources resources) {
-        @PrefGetter.ThemeType int themeType = PrefGetter.getThemeType(resources);
+        @PrefGetter.ThemeType int themeType = PrefGetter.getThemeType(resources, DarkModeUtil.isDarkMode(resources));
         return themeType != PrefGetter.LIGHT;
     }
 

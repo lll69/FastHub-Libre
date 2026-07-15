@@ -2,6 +2,7 @@ package com.fastaccess.ui.modules.about;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -40,8 +41,12 @@ public class FastHubAboutActivity extends MaterialAboutActivity {
 
     private View malRecyclerview;
 
+    protected boolean isDarkMode() {
+        return (getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES;
+    }
+
     @Override protected void onCreate(@Nullable Bundle savedInstanceState) {
-        ThemeEngine.INSTANCE.applyForAbout(this);
+        ThemeEngine.INSTANCE.applyForAbout(this, isDarkMode());
         super.onCreate(savedInstanceState);
         malRecyclerview = findViewById(R.id.mal_recyclerview);
     }

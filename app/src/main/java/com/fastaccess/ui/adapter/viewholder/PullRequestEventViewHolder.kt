@@ -23,6 +23,7 @@ import com.fastaccess.ui.widgets.recyclerview.BaseViewHolder
 import com.zzhoujay.markdown.style.CodeSpan
 import github.PullRequestTimelineQuery
 import github.type.StatusState
+import lll69.fasthub.DarkModeUtil
 
 /**
  * Created by kosh on 03/08/2017.
@@ -205,7 +206,7 @@ class PullRequestEventViewHolder private constructor(view: View, adapter: BaseRe
                     .append(" ")
                     .append(event.actor())
                     .append(":")
-                    .append(event.mergeRefName(), BackgroundColorSpan(HtmlHelper.getWindowBackground(PrefGetter.getThemeType())))
+                    .append(event.mergeRefName(), BackgroundColorSpan(HtmlHelper.getWindowBackground(PrefGetter.getThemeType(DarkModeUtil.isDarkMode(stateText.getResources())))))
                     .append(" ")
                     .append(ParseDateFormat.getTimeAgo((event.createdAt().toString())))
             stateImage.setImageResource(R.drawable.ic_merge)
@@ -251,7 +252,7 @@ class PullRequestEventViewHolder private constructor(view: View, adapter: BaseRe
                     .append(" ")
                     .append(it.login())
                     .append(":")
-                    .append(event.pullRequest().headRefName(), BackgroundColorSpan(HtmlHelper.getWindowBackground(PrefGetter.getThemeType())))
+                    .append(event.pullRequest().headRefName(), BackgroundColorSpan(HtmlHelper.getWindowBackground(PrefGetter.getThemeType(DarkModeUtil.isDarkMode(stateText.getResources())))))
                     .append(" ")
                     .append("branch")
                     .append(" ")
@@ -266,7 +267,7 @@ class PullRequestEventViewHolder private constructor(view: View, adapter: BaseRe
             stateText.text = SpannableBuilder.builder()
                     .bold(it.login())
                     .append(" ")
-                    .append("reference force pushed to", BackgroundColorSpan(HtmlHelper.getWindowBackground(PrefGetter.getThemeType())))
+                    .append("reference force pushed to", BackgroundColorSpan(HtmlHelper.getWindowBackground(PrefGetter.getThemeType(DarkModeUtil.isDarkMode(stateText.getResources())))))
                     .append(" ")
                     .url(substring(event.afterCommit().oid().toString()))
                     .append(" ")
@@ -285,7 +286,7 @@ class PullRequestEventViewHolder private constructor(view: View, adapter: BaseRe
                     .append(" ")
                     .append(it.login())
                     .append(":")
-                    .append(substring(event.headRefName()), BackgroundColorSpan(HtmlHelper.getWindowBackground(PrefGetter.getThemeType())))
+                    .append(substring(event.headRefName()), BackgroundColorSpan(HtmlHelper.getWindowBackground(PrefGetter.getThemeType(DarkModeUtil.isDarkMode(stateText.getResources())))))
                     .append(" ")
                     .append("branch")
                     .append(" ")
@@ -300,7 +301,7 @@ class PullRequestEventViewHolder private constructor(view: View, adapter: BaseRe
             stateText.text = SpannableBuilder.builder()
                     .bold(it.login())
                     .append(" ")
-                    .append("made a deployment", BackgroundColorSpan(HtmlHelper.getWindowBackground(PrefGetter.getThemeType())))
+                    .append("made a deployment", BackgroundColorSpan(HtmlHelper.getWindowBackground(PrefGetter.getThemeType(DarkModeUtil.isDarkMode(stateText.getResources())))))
                     .append(" ")
                     .append(event.deployment().latestStatus()?.state()?.name)
                     .append(" ")
@@ -373,7 +374,7 @@ class PullRequestEventViewHolder private constructor(view: View, adapter: BaseRe
             stateText.text = SpannableBuilder.builder()
                     .bold(it.login())
                     .append(" ")
-                    .append("force pushed to", BackgroundColorSpan(HtmlHelper.getWindowBackground(PrefGetter.getThemeType())))
+                    .append("force pushed to", BackgroundColorSpan(HtmlHelper.getWindowBackground(PrefGetter.getThemeType(DarkModeUtil.isDarkMode(stateText.getResources())))))
                     .append(" ")
                     .url(substring(event.afterCommit().oid().toString()))
                     .append(" ")

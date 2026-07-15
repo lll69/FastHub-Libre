@@ -7,6 +7,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <Spinner
+        android:id="@+id/systemModeSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/system_theme_modes"/>
+
     <com.fastaccess.ui.widgets.ViewPagerView
         android:id="@+id/pager"
         android:layout_width="match_parent"

@@ -18,6 +18,7 @@ import com.fastaccess.R
 import com.fastaccess.helper.*
 import com.fastaccess.ui.base.BaseFragment
 import com.fastaccess.ui.modules.main.premium.PremiumActivity
+import com.fastaccess.ui.modules.theme.ThemeActivity
 import com.fastaccess.ui.widgets.SpannableBuilder
 
 /**
@@ -32,6 +33,7 @@ class ThemeFragment : BaseFragment<ThemeFragmentMvp.View, ThemeFragmentPresenter
     private var unbinder: Unbinder? = null
 
     private val THEME = "appTheme"
+    private val THEME_DARK = "appThemeDark"
     private var primaryDarkColor: Int = 0
     private var theme: Int = 0
     private var themeListener: ThemeFragmentMvp.ThemeListener? = null
@@ -144,7 +146,7 @@ class ThemeFragment : BaseFragment<ThemeFragmentMvp.View, ThemeFragmentPresenter
     }
 
     private fun setTheme(theme: String) {
-        PrefHelper.set(THEME, theme)
+        PrefHelper.set(if ((getContext() as ThemeActivity).getSelectedSystemMode() == 0) THEME else THEME_DARK, theme)
         themeListener?.onThemeApplied()
     }
 

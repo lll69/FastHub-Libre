@@ -27,6 +27,11 @@
         <item>@string/amlod_theme_mode</item>
     </string-array>
 
+    <string-array name="system_theme_modes" translatable="false">
+        <item>@string/light_theme_mode</item>
+        <item>@string/dark_theme_mode</item>
+    </string-array>
+
     <string-array name="theme_colors" translatable="false">
         <item>@string/red_theme_mode</item>
         <item>@string/pink_theme_mode</item>

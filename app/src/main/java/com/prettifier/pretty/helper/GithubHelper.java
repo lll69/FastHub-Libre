@@ -9,6 +9,7 @@ import com.fastaccess.data.dao.NameParser;
 import com.fastaccess.helper.PrefGetter;
 import com.fastaccess.helper.ViewHelper;
 
+import lll69.fasthub.DarkModeUtil;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -140,13 +141,13 @@ public class GithubHelper {
         return "<style>\n" +
                 "body .highlight pre, body pre {\n" +
                 "background-color: " + primaryColor + " !important;\n" +
-                (PrefGetter.getThemeType(context) == PrefGetter.AMLOD ? "border: solid 1px " + accentColor + " !important;\n" : "") +
+                (PrefGetter.getThemeType(context, DarkModeUtil.isDarkMode(context.getResources())) == PrefGetter.AMLOD ? "border: solid 1px " + accentColor + " !important;\n" : "") +
                 "}\n" +
                 "</style>";
     }
 
     @NonNull private static String getCodeBackgroundColor(@NonNull Context context) {
-        @PrefGetter.ThemeType int themeType = PrefGetter.getThemeType();
+        @PrefGetter.ThemeType int themeType = PrefGetter.getThemeType(DarkModeUtil.isDarkMode(context.getResources()));
         if (themeType == PrefGetter.BLUISH) {
             return "#" + Integer.toHexString(ViewHelper.getPrimaryDarkColor(context)).substring(2).toUpperCase();
         }
