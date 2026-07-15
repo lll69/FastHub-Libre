@@ -63,6 +63,12 @@ public class SchemeParser {
         launchUri(context, data, false);
     }
 
+    public static void launchUri(@NonNull Context context, @Nullable String data, boolean showRepoBtn) {
+        if (data != null) {
+            launchUri(context, Uri.parse(data), showRepoBtn, false);
+        }
+    }
+
     public static void launchUri(@NonNull Context context, @NonNull Uri data, boolean showRepoBtn) {
         launchUri(context, data, showRepoBtn, false);
     }

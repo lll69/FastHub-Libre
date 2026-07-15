@@ -1,7 +1,6 @@
 package com.fastaccess.ui.modules.feeds;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -34,6 +33,7 @@ import com.fastaccess.ui.modules.repos.wiki.WikiActivity;
 import java.util.ArrayList;
 
 import io.reactivex.Observable;
+import lll69.fasthub.UrlConverter;
 
 /**
  * Created by Kosh on 11 Nov 2016, 12:36 PM
@@ -154,11 +154,11 @@ public class FeedsPresenter extends BasePresenter<FeedsMvp.View> implements Feed
                         v.getContext().startActivity(intent);
                     }
                 } else if (payloadModel.getIssue() != null) {
-                    SchemeParser.launchUri(v.getContext(), Uri.parse(payloadModel.getIssue().getHtmlUrl()), true);
+                    SchemeParser.launchUri(v.getContext(), payloadModel.getIssue().getHtmlUrl(), true);
                 } else if (payloadModel.getPullRequest() != null) {
-                    SchemeParser.launchUri(v.getContext(), Uri.parse(payloadModel.getPullRequest().getHtmlUrl()), true);
+                    SchemeParser.launchUri(v.getContext(), UrlConverter.getHtmlUrl(payloadModel.getPullRequest()), true);
                 } else if (payloadModel.getComment() != null) {
-                    SchemeParser.launchUri(v.getContext(), Uri.parse(payloadModel.getComment().getHtmlUrl()), true);
+                    SchemeParser.launchUri(v.getContext(), payloadModel.getComment().getHtmlUrl(), true);
                 } else if (item.getType() == EventsType.ReleaseEvent && payloadModel.getRelease() != null) {
                     NameParser nameParser = new NameParser(payloadModel.getRelease().getHtmlUrl());
                     v.getContext().startActivity(ReleasesListActivity.getIntent(v.getContext(), nameParser.getUsername(), nameParser.getName(),
