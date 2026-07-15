@@ -18,6 +18,7 @@ import com.fastaccess.ui.base.mvp.BaseMvp;
 import com.fastaccess.ui.base.mvp.presenter.BasePresenter;
 
 import io.reactivex.Observable;
+import lll69.fasthub.UrlConverter;
 
 /**
  * Created by Kosh on 27 Nov 2016, 3:43 PM
@@ -74,7 +75,7 @@ class ViewerPresenter extends BasePresenter<ViewerMvp.View> implements ViewerMvp
         if (isImage || MarkDownProvider.isArchive(url)) {
             return;
         }
-        makeRestCall(RestProvider.getRepoService(isEnterprise()).getFileAsStream(url),
+        makeRestCall(RestProvider.getRepoService(isEnterprise()).getFileAsStream(UrlConverter.convertRawUrlToApiUrl(url)),
                 body -> {
                     downloadedStream = body;
                     sendToView(view -> view.onSetCode(body));
@@ -126,9 +127,9 @@ class ViewerPresenter extends BasePresenter<ViewerMvp.View> implements ViewerMvp
             return;
         }
         Observable<String> streamObservable = MarkDownProvider.isMarkdown(url)
-                                              ? RestProvider.getRepoService(isEnterprise()).getFileAsHtmlStream(url)
-                                              : RestProvider.getRepoService(isEnterprise()).getFileAsStream(url);
-        Observable<String> observable = isRepo ? RestProvider.getRepoService(isEnterprise()).getReadmeHtml(url) : streamObservable;
+                                              ? RestProvider.getRepoService(isEnterprise()).getFileAsHtmlStream(UrlConverter.convertRawUrlToApiUrl(url))
+                                              : RestProvider.getRepoService(isEnterprise()).getFileAsStream(UrlConverter.convertRawUrlToApiUrl(url));
+        Observable<String> observable = isRepo ? RestProvider.getRepoService(isEnterprise()).getReadmeHtml(UrlConverter.convertRawUrlToApiUrl(url)) : streamObservable;
         makeRestCall(observable, content -> {
             downloadedStream = content;
             ViewerFile fileModel = new ViewerFile();
