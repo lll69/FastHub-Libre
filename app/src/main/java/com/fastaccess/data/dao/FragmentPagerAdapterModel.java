@@ -221,7 +221,8 @@ import lombok.Setter;
                 new FragmentPagerAdapterModel(context.getString(R.string.overview), OrgProfileOverviewFragment.newInstance(login)),
                 new FragmentPagerAdapterModel(context.getString(R.string.repos), OrgReposFragment.newInstance(login)),
                 new FragmentPagerAdapterModel(context.getString(R.string.people), OrgMembersFragment.newInstance(login)),
-                new FragmentPagerAdapterModel(context.getString(R.string.teams), isMember ? OrgTeamFragment.newInstance(login) : null))
+                new FragmentPagerAdapterModel(context.getString(R.string.teams), isMember ? OrgTeamFragment.newInstance(login) : null),
+                new FragmentPagerAdapterModel(context.getString(R.string.followers), ProfileFollowersFragment.newInstance(login)))
                 .filter(fragmentPagerAdapterModel -> fragmentPagerAdapterModel.getFragment() != null)
                 .collect(Collectors.toList());
     }

@@ -15,6 +15,8 @@ public interface OrgProfileOverviewMvp {
 
     interface View extends BaseMvp.FAView {
         void onInitViews(@Nullable User userModel);
+
+        void invalidateFollowBtn();
     }
 
     interface Presenter extends BaseMvp.FAPresenter {
@@ -23,5 +25,13 @@ public interface OrgProfileOverviewMvp {
         void onWorkOffline(@NonNull String login);
 
         @NonNull String getLogin();
+
+        void onCheckFollowStatus(@NonNull String login);
+
+        boolean isSuccessResponse();
+
+        boolean isFollowing();
+
+        void onFollowButtonClicked(@NonNull String login);
     }
 }

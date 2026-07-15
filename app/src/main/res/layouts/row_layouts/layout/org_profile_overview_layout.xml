@@ -66,6 +66,8 @@
                     android:autoLink="all"
                     tools:text="What’s the secret to large and cold peanut butter? Always use quartered szechuan pepper."/>
 
+                <include layout="@layout/profile_follow_action_layout"/>
+
                 <com.fastaccess.ui.widgets.FontTextView
                     android:id="@+id/location"
                     style="@style/Base.TextAppearance.AppCompat.Subhead"
