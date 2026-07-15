@@ -299,7 +299,7 @@ public class PrefGetter {
                 return BLUISH;
             }
         }
-        return LIGHT;
+        return dark ? DARK : LIGHT;
     }
 
     @ThemeColor private static int getThemeColor(@NonNull Resources resources) {
